@@ -1,5 +1,6 @@
 <script lang="ts">
-	import he from 'he';
+	import { decode } from 'he';
+
 	async function getData() {
 		const res = await fetch(`https://opentdb.com/api.php?amount=10`);
 		const data = await res.json();
@@ -11,6 +12,7 @@
 			throw new Error(data);
 		}
 	}
+
 	let promise = getData();
 </script>
 
@@ -19,7 +21,7 @@
 {#await promise then questions}
 	<ul>
 		{#each questions as question}
-			<li>{he.decode(question.question)}</li>
+			<li>{decode(question.question)}</li>
 		{/each}
 	</ul>
 {:catch error}
