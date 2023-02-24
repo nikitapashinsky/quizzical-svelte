@@ -3,15 +3,21 @@
 	import type { PageServerData } from './$types';
 
 	export let data: PageServerData;
-
-	const questions = data.data.results;
-	console.log(questions);
+	const { questions } = data;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
+<h1>Quizzical</h1>
 
-<ul>
-	{#each questions as question}
-		<li>{decode(question.question)}</li>
-	{/each}
-</ul>
+{#each questions as question}
+	<div>
+		<h3>{decode(question.question)}</h3>
+		<ul>
+			{#each question.incorrect_answers as answer}
+				<li>{answer}</li>
+			{/each}
+		</ul>
+	</div>
+{/each}
+
+<style>
+</style>
